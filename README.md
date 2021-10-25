@@ -1,6 +1,6 @@
 # IntroductionToRobotics
 
-#Tema 1
+#Tema 1#
 Am avut de facut cu ajutorul placii Anduino uno sa facem sa lumineze un led RGB cu 3 potentiometre, unul pentru fiecare culoare.
 La inceput am luat porturile digitale 11, 10 si 9 pentru cuorile led-ului (11 pentru rosu, 10 pentru verde, 9 pentru albastru).
 """
