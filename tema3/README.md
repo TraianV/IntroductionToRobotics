@@ -40,10 +40,13 @@ void displayNumber(byte digit)
     digitalWrite(segments[i], digitMatrix[digit][i]);
   }
 }
+```
+Am folosit un 7-segment display pentru a masura intensitatea campului electromagnetic
+```
 const int inputPin = A0;  ///antena
 const int buzzPin = 9;    //buzzer
 float val;                //salveaza informatii pt analog 5
-int array1[sample];
+int array1[sample];       //antena ia mai multe informatii intr-un interval scurt de timp si buzzer-ul suna cand detecta ceva in intervalul de timp
 unsigned long averaging;
 
 void setup() 
@@ -67,7 +70,7 @@ void loop()
   val = averaging / sample;
   analogWrite(buzzPin, val);
 
-  val = constrain(val, 0, 10);
+  val = constrain(val, 0, 10);  //
   if (0.0 <= val and val <= 1.0)               
   {  
     displayNumber(0);   
