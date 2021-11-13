@@ -57,3 +57,4 @@ void loop() {
 
 }
 ```
+[photo](IntroductionToRobotics/tema1/20211025_222504.jpg)
