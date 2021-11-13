@@ -57,4 +57,4 @@ void loop() {
 
 }
 ```
-[photo](https://github.com/TraianV/IntroductionToRobotics/blob/main/tema1/tema1)
+[photo](tema1.jpeg)
