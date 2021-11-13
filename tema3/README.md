@@ -1,5 +1,5 @@
 #Tema 3
-[photo tema 3](https://github.com/TraianV/IntroductionToRobotics/blob/main/tema3/tema3.jpg)
+![photo tema 3](https://github.com/TraianV/IntroductionToRobotics/blob/main/tema3/tema3.jpg)
 ```
 #define sample 300 
 
