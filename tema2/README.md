@@ -68,8 +68,9 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   ```
-  La inceput doar culoarea rosie la pietoni si culoare verde la mijloace de transport sunt in functiune. 
-  ![photo faza 1](tema2 faza1.jpg)
+La inceput doar culoarea rosie la pietoni si culoare verde la mijloace de transport sunt in functiune. 
+  
+[photo faza 1](tema2 faza1.jpg)
   ```
   digitalWrite(ledRedPed, ledRedPedState);
   digitalWrite(ledGreenCar, ledGreenCarState);
@@ -110,7 +111,8 @@ Am pornit un timer pana cand se schimba culoarea verde la mijloacele de transpor
         digitalWrite(ledYellowCar, ledYellowCarState);
 ```
 Am pornit un al doilea timer pana cand seschimba culoarea galben la mijloacele de transport in rosu si rosu la pietoni in verde.
-![photo faza 2](tema2 faza2.jpg)
+
+[photo faza 2](tema2 faza2.jpg)
 ```
         timer2 = 0;
         lastTimer2 = 0;
@@ -142,7 +144,8 @@ Am pornit un al doilea timer pana cand seschimba culoarea galben la mijloacele d
         digitalWrite(ledRedPed, ledRedPedState);
 ```
 Ultimul timer este folosit pana cand semaforul se intoarce in starea initiala.
-![photo faza 3](tema2 faza3.jpg)
+
+[photo faza 3](tema2 faza3.jpg)
 ```
         timer3 = 0;
         lastTimer3 = 0;
