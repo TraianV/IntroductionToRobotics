@@ -57,4 +57,4 @@ void loop() {
 
 }
 ```
-[photo](tema1.jpeg)
+[photo tema 1](tema1.jpeg)
