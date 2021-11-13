@@ -1,4 +1,7 @@
 #Tema 3
+
+Pentru tema 3 a trebui sa cream un dispozitiv de ,,detectat fantome" (aka un sipozitiv care detecta campuri electormagnetice)
+
 ![photo tema 3](https://github.com/TraianV/IntroductionToRobotics/blob/main/tema3/tema3.jpg)
 ```
 #define sample 300 
