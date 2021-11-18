@@ -1,6 +1,4 @@
 ```
-#include <EEPROM.h>
-
 const int dataPin = 12;
 const int latchPin = 11;
 const int clockPin = 10;
@@ -43,7 +41,7 @@ const int pinX = A0;
 const int pinY = A1;
 
 const int pinSW = 3;
-bool swState = HIGH;
+bool swState;
 
 int xValue = 0;
 int yValue = 0;
@@ -57,12 +55,16 @@ int upThreshold = 750;
 
 bool joyMoved = false;
 
-int number[segmentCount] = {0, 0, 0, 0};
+int number[segmentCount] = {1, 2, 3, 4};
 
 int index = 0;
+int digit;
 
-const int interval = 500;
+const int interval = 200;
 unsigned long lastFlick = 0;
+
+static unsigned long lastInterrupt = 0;
+unsigned long interrupt = millis();
 
 void setup(){
   pinMode(pinSW, INPUT_PULLUP);
@@ -77,11 +79,10 @@ void setup(){
     pinMode(segmentDigits[i],OUTPUT);
     digitalWrite(segmentDigits[i],LOW);
   }
-  loadState();
   Serial.begin(9600);
 }
 void loop(){
-  
+  Serial.println(swState);
   writeNumber();
   if(swState == HIGH)
   {
@@ -94,7 +95,7 @@ void loop(){
     
     if (yValue > rightThreshold && joyMoved == false)
     {
-      if (index + 1 < segmentCount) 
+      if (index +1 < segmentCount) 
       {
         index++;
       }
@@ -128,11 +129,11 @@ void loop(){
     xValue = analogRead(pinX);
     dpState = HIGH;
     
-    int digit = number[index];
+    digit = number[index];
     
     if(xValue < downThreshold && joyMoved == false)
     {
-    if(digit >0)
+      if(digit >0)
       {
         digit--;
       }
@@ -159,9 +160,28 @@ void loop(){
         joyMoved = false;
       }
     number[index] = digit;
+    writeNumber();
     
   }
 }
+
+void changeSwState() 
+{
+
+  if (interrupt - lastInterrupt >= interval) 
+  {
+    if(swState == LOW)
+    {
+      swState = HIGH;
+    }
+    else
+      swState = LOW;
+  }
+ 
+  lastInterrupt = interrupt;
+
+}
+
 void writeReg(int digit){
   
   digitalWrite(latchPin,LOW);
@@ -171,9 +191,10 @@ void writeReg(int digit){
   digitalWrite(latchPin, HIGH);
   
 }
+
 void showDigit(int digitNumber)
 {
-  for(int i=0;i < segmentCount; i++){
+  for(int i=0; i < segmentCount; i++){
     
     digitalWrite(segmentDigits[i],HIGH);
     
@@ -183,62 +204,18 @@ void showDigit(int digitNumber)
   
 }
 
-void changeSwState() 
-{
-  static unsigned long lastInterrupt = 0;
-  unsigned long interrupt = millis();
 
-  if (interrupt - lastInterrupt >= interval) 
-  {
-    saveState(index);
-    swState = !swState;
-  }
- 
-  lastInterrupt = interrupt;
-
-}
 
 void writeNumber()
 {
   
-  for (int i = 0; i < segmentCount; i++)
-  {
-    showDigit(segmentCount - i - 1);
-  }
-}
-
-
-int getCurrentNumber() 
-{
-  int nr = 0;
   for (int i = 0; i < segmentCount; i++) 
   {
-    nr = nr * 10 + number[i];
-  }
-  return nr;
-}
-
-
-void setCurrentNumber(int currentNumber) 
-{
-  for (int i = segmentCount - 1; i >= 0; i--) 
-  {
-    number[i] = currentNumber % 10;
-    currentNumber /= 10;
+    showDigit(segmentCount-i-1);
+    writeReg(digitArray[number[i]]);
   }
 }
 
 
-void saveState(int i) {
-  EEPROM.write(i, number[i]);
-  EEPROM.write(segmentCount, i);
-}
 
-
-
-void loadState() {
-  for (int i = 0; i < segmentCount; ++ i) {
-    number[i] = EEPROM.read(i);
-  }
-}
 ```
